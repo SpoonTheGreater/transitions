@@ -162,21 +162,16 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         NSTimeInterval duration = 2;
-        
         [CATransaction begin];
         [CATransaction setValue:[NSNumber numberWithFloat:duration] forKey:kCATransactionAnimationDuration];
-        
         [CATransaction setCompletionBlock:^{
             self.layer.mask = nil;
             completion();
         }];
-        
-        //[self.layer.mask setBounds:self.bounds];
         [self.layer.mask setFrame:self.bounds];
         [CATransaction commit];
     });
 }
-
 
 + (NSString*)stringForTranstionType:(TRANSTION_TYPE)transtionType
 {

@@ -17,8 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    transitionViewRect = (CGRect){self.view.frame.size.width * 0.2,self.view.frame.size.height * 0.2, self.view.frame.size.width * 0.6,self.view.frame.size.height * 0.6};
-    currentTransition = TRANSTION_TYPE_TOP_DOWN;
+    double viewSize = self.view.frame.size.width * 0.8;
+    
+    transitionViewRect = (CGRect){self.view.frame.size.width * 0.1,self.view.frame.size.height * 0.5 - (viewSize * 0.5), viewSize, viewSize};
+    currentTransition = TRANSTION_TYPE_STAR_WIPE;
     [self initRed];
     [self initBlue];
     [self.view addSubview:red];
