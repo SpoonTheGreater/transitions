@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "transitionView.h"
 
 @interface ViewController : UIViewController
-
+{
+    CGRect transitionViewRect;
+    transitionView *blue;
+    transitionView *red;
+    TRANSTION_TYPE currentTransition;
+    bool isTransitioning;
+    UILabel *currentTransitionName;
+}
 
 @end
 

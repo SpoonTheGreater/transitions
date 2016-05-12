@@ -15,6 +15,7 @@
 		1A19F3B91CE5030E002F8C86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A19F3B71CE5030E002F8C86 /* LaunchScreen.storyboard */; };
 		1A19F3C41CE5030E002F8C86 /* transitionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A19F3C31CE5030E002F8C86 /* transitionsTests.m */; };
 		1A19F3CF1CE5030E002F8C86 /* transitionsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A19F3CE1CE5030E002F8C86 /* transitionsUITests.m */; };
+		1A19F3E01CE51130002F8C86 /* transitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A19F3DF1CE51130002F8C86 /* transitionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		1A19F3CA1CE5030E002F8C86 /* transitionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = transitionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A19F3CE1CE5030E002F8C86 /* transitionsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = transitionsUITests.m; sourceTree = "<group>"; };
 		1A19F3D01CE5030E002F8C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A19F3DE1CE51130002F8C86 /* transitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transitionView.h; path = transitionView/transitionView.h; sourceTree = "<group>"; };
+		1A19F3DF1CE51130002F8C86 /* transitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = transitionView.m; path = transitionView/transitionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 		1A19F3A81CE5030E002F8C86 /* transitions */ = {
 			isa = PBXGroup;
 			children = (
+				1A19F3DC1CE51113002F8C86 /* transitionView */,
 				1A19F3AC1CE5030E002F8C86 /* AppDelegate.h */,
 				1A19F3AD1CE5030E002F8C86 /* AppDelegate.m */,
 				1A19F3AF1CE5030E002F8C86 /* ViewController.h */,
@@ -138,6 +142,15 @@
 				1A19F3D01CE5030E002F8C86 /* Info.plist */,
 			);
 			path = transitionsUITests;
+			sourceTree = "<group>";
+		};
+		1A19F3DC1CE51113002F8C86 /* transitionView */ = {
+			isa = PBXGroup;
+			children = (
+				1A19F3DE1CE51130002F8C86 /* transitionView.h */,
+				1A19F3DF1CE51130002F8C86 /* transitionView.m */,
+			);
+			name = transitionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A19F3B11CE5030E002F8C86 /* ViewController.m in Sources */,
+				1A19F3E01CE51130002F8C86 /* transitionView.m in Sources */,
 				1A19F3AE1CE5030E002F8C86 /* AppDelegate.m in Sources */,
 				1A19F3AB1CE5030E002F8C86 /* main.m in Sources */,
 			);
