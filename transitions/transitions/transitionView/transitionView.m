@@ -31,6 +31,13 @@
             [self starWipeOutWithCompletion:completion];
             break;
         }
+        case TRANSTION_TYPE_TOP_DOWN:
+        {
+            [self topDownWipeOutWithCompletion:completion];
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -46,6 +53,13 @@
             [self starWipeInWithCompletion:completion];
             break;
         }
+        case TRANSTION_TYPE_TOP_DOWN:
+        {
+            [self topDownWipeInWithCompletion:completion];
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -73,6 +87,8 @@
 - (void)starWipeOutWithCompletion:(void(^)(void))completion
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self removeFromSuperview];
+        self.alpha = 1;
         completion();
     });
 }
@@ -124,6 +140,44 @@
     [CATransaction commit];
 }
 
+- (void)topDownWipeOutWithCompletion:(void(^)(void))completion
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self removeFromSuperview];
+        self.alpha = 1;
+        completion();
+    });
+}
+
+- (void)topDownWipeInWithCompletion:(void(^)(void))completion
+{
+    [[self superview] bringSubviewToFront:self];
+    CALayer *mask = [CALayer layer];
+    [mask setFrame:(CGRect){0,0,self.frame.size.width,0}];
+    [mask setBackgroundColor:[UIColor whiteColor].CGColor];
+    self.layer.mask = mask;
+    self.layer.mask.masksToBounds = YES;
+    self.layer.masksToBounds = YES;
+    self.clipsToBounds = YES;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        NSTimeInterval duration = 2;
+        
+        [CATransaction begin];
+        [CATransaction setValue:[NSNumber numberWithFloat:duration] forKey:kCATransactionAnimationDuration];
+        
+        [CATransaction setCompletionBlock:^{
+            self.layer.mask = nil;
+            completion();
+        }];
+        
+        //[self.layer.mask setBounds:self.bounds];
+        [self.layer.mask setFrame:self.bounds];
+        [CATransaction commit];
+    });
+}
+
+
 + (NSString*)stringForTranstionType:(TRANSTION_TYPE)transtionType
 {
     static NSArray *_names;
@@ -131,7 +185,8 @@
     dispatch_once(&onceToken, ^{
         _names = @[
                    @"Simple Fade",
-                   @"Star Wipe"
+                   @"Star Wipe",
+                   @"Top Down"
                    ];
     });
     return [_names objectAtIndex:transtionType];
