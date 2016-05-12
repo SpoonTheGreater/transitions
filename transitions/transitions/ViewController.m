@@ -26,6 +26,14 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(transition)];
     [self.view addGestureRecognizer:tap];
     
+    addImageButton = [[UIButton alloc] initWithFrame:(CGRect){0,0,red.frame.size.width,red.frame.origin.y * 0.25}];
+    [addImageButton setCenter:(CGPoint){red.center.x, red.frame.origin.y * 0.5}];
+    [addImageButton setTitle:@"Set image" forState:UIControlStateNormal];
+    [addImageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [addImageButton addTarget:self action:@selector(addPhoto) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:addImageButton];
+    
     currentTransitionName = [[UILabel alloc] initWithFrame:(CGRect){0,0,0,0}];
     [currentTransitionName setTextAlignment:NSTextAlignmentCenter];
     [currentTransitionName setText:[transitionView stringForTranstionType:currentTransition]];
@@ -90,6 +98,33 @@
     [currentTransitionName setCenter:(CGPoint){red.center.x, red.frame.size.height + (red.frame.origin.y * 1.5)}];
 }
 
+- (void)addPhoto
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    if( [red superview] )
+    {
+        [red setBackgroundColor:[UIColor colorWithPatternImage:chosenImage]];
+    }
+    else
+    {
+        [blue setBackgroundColor:[UIColor colorWithPatternImage:chosenImage]];
+    }
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
 
 
 @end

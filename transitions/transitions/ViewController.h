@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "transitionView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UIPickerViewDelegate, UINavigationControllerDelegate>
 {
     CGRect transitionViewRect;
     transitionView *blue;
@@ -17,6 +17,7 @@
     TRANSTION_TYPE currentTransition;
     bool isTransitioning;
     UILabel *currentTransitionName;
+    UIButton *addImageButton;
 }
 
 @end
