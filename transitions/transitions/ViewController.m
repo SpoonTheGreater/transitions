@@ -104,14 +104,16 @@
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.allowsEditing = NO;
     [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:picker animated:YES completion:NULL];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    if( !chosenImage )
+        chosenImage = info[UIImagePickerControllerOriginalImage];
     UIImageView *backgroundImage;
     if( [red superview] )
     {
@@ -123,7 +125,7 @@
         }
         [backgroundImage setImage:chosenImage];
         [backgroundImage setFrame:(CGRect){0,0,red.bounds.size}];
-        [backgroundImage setContentMode:UIViewContentModeCenter];
+        [backgroundImage setContentMode:UIViewContentModeScaleToFill];
         [backgroundImage setClipsToBounds:YES];
     }
     else
@@ -136,7 +138,7 @@
         }
         [backgroundImage setImage:chosenImage];
         [backgroundImage setFrame:(CGRect){0,0,blue.bounds.size}];
-        [backgroundImage setContentMode:UIViewContentModeCenter];
+        [backgroundImage setContentMode:UIViewContentModeScaleToFill];
         [backgroundImage setClipsToBounds:YES];
     }
     [picker dismissViewControllerAnimated:YES completion:NULL];
